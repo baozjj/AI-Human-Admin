@@ -32,6 +32,7 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   home: () => import("@/views/home/index.vue"),
   "knowledge-graph_entity-management": () => import("@/views/knowledge-graph/entity-management/index.vue"),
   "knowledge-graph_graph-search": () => import("@/views/knowledge-graph/graph-search/index.vue"),
+  "knowledge-graph_relation-management": () => import("@/views/knowledge-graph/relation-management/index.vue"),
   manage_menu: () => import("@/views/manage/menu/index.vue"),
   manage_role: () => import("@/views/manage/role/index.vue"),
   "manage_user-detail": () => import("@/views/manage/user-detail/[id].vue"),

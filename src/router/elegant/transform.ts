@@ -194,6 +194,7 @@ const routeMap: RouteMap = {
   "knowledge-graph": "/knowledge-graph",
   "knowledge-graph_entity-management": "/knowledge-graph/entity-management",
   "knowledge-graph_graph-search": "/knowledge-graph/graph-search",
+  "knowledge-graph_relation-management": "/knowledge-graph/relation-management",
   "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?",
   "manage": "/manage",
   "manage_menu": "/manage/menu",

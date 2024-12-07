@@ -199,9 +199,19 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'knowledge-graph',
       i18nKey: 'route.knowledge-graph',
-      icon: 'material-symbols:bubble-chart'
+      icon: 'oui:app-packetbeat'
     },
     children: [
+      {
+        name: 'knowledge-graph_graph-search',
+        path: '/knowledge-graph/graph-search',
+        component: 'view.knowledge-graph_graph-search',
+        meta: {
+          title: 'knowledge-graph_graph-search',
+          i18nKey: 'route.knowledge-graph_graph-search',
+          icon: 'oui:integration-search'
+        }
+      },
       {
         name: 'knowledge-graph_entity-management',
         path: '/knowledge-graph/entity-management',
@@ -213,13 +223,13 @@ export const generatedRoutes: GeneratedRoute[] = [
         }
       },
       {
-        name: 'knowledge-graph_graph-search',
-        path: '/knowledge-graph/graph-search',
-        component: 'view.knowledge-graph_graph-search',
+        name: 'knowledge-graph_relation-management',
+        path: '/knowledge-graph/relation-management',
+        component: 'view.knowledge-graph_relation-management',
         meta: {
-          title: 'knowledge-graph_graph-search',
-          i18nKey: 'route.knowledge-graph_graph-search',
-          icon: 'oui:integration-search'
+          title: 'knowledge-graph_relation-management',
+          i18nKey: 'route.knowledge-graph_relation-management',
+          icon: 'oui:kql-operand'
         }
       }
     ]

@@ -190,7 +190,8 @@ const local: App.I18n.Schema = {
     exception_500: '500',
     'knowledge-graph': '知识图谱',
     'knowledge-graph_graph-search': '图谱查询',
-    'knowledge-graph_entity-management': '实体管理'
+    'knowledge-graph_entity-management': '实体管理',
+    'knowledge-graph_relation-management': '关系管理'
   },
   page: {
     login: {
