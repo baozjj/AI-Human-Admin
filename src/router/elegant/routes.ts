@@ -57,7 +57,7 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'ai-avatar',
       i18nKey: 'route.ai-avatar',
-      icon:'tdesign:accessibility'
+      icon: 'tdesign:accessibility'
     },
     children: [
       {
@@ -67,7 +67,17 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'ai-avatar_avatar-preview',
           i18nKey: 'route.ai-avatar_avatar-preview',
-          icon:'tdesign:user-circle'
+          icon: 'tdesign:user-circle'
+        }
+      },
+      {
+        name: 'ai-avatar_qa-config',
+        path: '/ai-avatar/qa-config',
+        component: 'view.ai-avatar_qa-config',
+        meta: {
+          title: 'ai-avatar_qa-config',
+          i18nKey: 'route.ai-avatar_qa-config',
+          icon: 'tdesign:root-list'
         }
       }
     ]

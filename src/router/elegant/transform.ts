@@ -181,6 +181,7 @@ const routeMap: RouteMap = {
   "about": "/about",
   "ai-avatar": "/ai-avatar",
   "ai-avatar_avatar-preview": "/ai-avatar/avatar-preview",
+  "ai-avatar_qa-config": "/ai-avatar/qa-config",
   "function": "/function",
   "function_hide-child": "/function/hide-child",
   "function_hide-child_one": "/function/hide-child/one",
