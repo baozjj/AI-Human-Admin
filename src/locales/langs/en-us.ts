@@ -194,7 +194,8 @@ const local: App.I18n.Schema = {
     'knowledge-graph_relation-management': '关系管理',
     'ai-avatar': 'AI 数字人',
     'ai-avatar_avatar-preview': '数字人预览',
-    'ai-avatar_qa-config': '问答配置'
+    'ai-avatar_qa-config': '问答配置',
+    'ai-avatar_model-config': '模型配置'
   },
   page: {
     login: {

@@ -22,6 +22,7 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   login: () => import("@/views/_builtin/login/index.vue"),
   about: () => import("@/views/about/index.vue"),
   "ai-avatar_avatar-preview": () => import("@/views/ai-avatar/avatar-preview/index.vue"),
+  "ai-avatar_model-config": () => import("@/views/ai-avatar/model-config/index.vue"),
   "ai-avatar_qa-config": () => import("@/views/ai-avatar/qa-config/index.vue"),
   "function_hide-child_one": () => import("@/views/function/hide-child/one/index.vue"),
   "function_hide-child_three": () => import("@/views/function/hide-child/three/index.vue"),

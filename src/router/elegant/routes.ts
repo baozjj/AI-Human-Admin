@@ -71,6 +71,16 @@ export const generatedRoutes: GeneratedRoute[] = [
         }
       },
       {
+        name: 'ai-avatar_model-config',
+        path: '/ai-avatar/model-config',
+        component: 'view.ai-avatar_model-config',
+        meta: {
+          title: 'ai-avatar_model-config',
+          i18nKey: 'route.ai-avatar_model-config',
+          icon: 'tdesign:chart-3d'
+        }
+      },
+      {
         name: 'ai-avatar_qa-config',
         path: '/ai-avatar/qa-config',
         component: 'view.ai-avatar_qa-config',

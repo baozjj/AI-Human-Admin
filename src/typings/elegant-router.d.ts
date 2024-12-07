@@ -35,6 +35,7 @@ declare module "@elegant-router/types" {
     "about": "/about";
     "ai-avatar": "/ai-avatar";
     "ai-avatar_avatar-preview": "/ai-avatar/avatar-preview";
+    "ai-avatar_model-config": "/ai-avatar/model-config";
     "ai-avatar_qa-config": "/ai-avatar/qa-config";
     "function": "/function";
     "function_hide-child": "/function/hide-child";
@@ -146,6 +147,7 @@ declare module "@elegant-router/types" {
     | "login"
     | "about"
     | "ai-avatar_avatar-preview"
+    | "ai-avatar_model-config"
     | "ai-avatar_qa-config"
     | "function_hide-child_one"
     | "function_hide-child_three"
