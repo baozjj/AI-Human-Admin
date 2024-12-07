@@ -51,6 +51,28 @@ export const generatedRoutes: GeneratedRoute[] = [
     }
   },
   {
+    name: 'ai-avatar',
+    path: '/ai-avatar',
+    component: 'layout.base',
+    meta: {
+      title: 'ai-avatar',
+      i18nKey: 'route.ai-avatar',
+      icon:'tdesign:accessibility'
+    },
+    children: [
+      {
+        name: 'ai-avatar_avatar-preview',
+        path: '/ai-avatar/avatar-preview',
+        component: 'view.ai-avatar_avatar-preview',
+        meta: {
+          title: 'ai-avatar_avatar-preview',
+          i18nKey: 'route.ai-avatar_avatar-preview',
+          icon:'tdesign:user-circle'
+        }
+      }
+    ]
+  },
+  {
     name: 'function',
     path: '/function',
     component: 'layout.base',
@@ -203,16 +225,6 @@ export const generatedRoutes: GeneratedRoute[] = [
     },
     children: [
       {
-        name: 'knowledge-graph_graph-search',
-        path: '/knowledge-graph/graph-search',
-        component: 'view.knowledge-graph_graph-search',
-        meta: {
-          title: 'knowledge-graph_graph-search',
-          i18nKey: 'route.knowledge-graph_graph-search',
-          icon: 'oui:integration-search'
-        }
-      },
-      {
         name: 'knowledge-graph_entity-management',
         path: '/knowledge-graph/entity-management',
         component: 'view.knowledge-graph_entity-management',
@@ -220,6 +232,16 @@ export const generatedRoutes: GeneratedRoute[] = [
           title: 'knowledge-graph_entity-management',
           i18nKey: 'route.knowledge-graph_entity-management',
           icon: 'oui:dot'
+        }
+      },
+      {
+        name: 'knowledge-graph_graph-search',
+        path: '/knowledge-graph/graph-search',
+        component: 'view.knowledge-graph_graph-search',
+        meta: {
+          title: 'knowledge-graph_graph-search',
+          i18nKey: 'route.knowledge-graph_graph-search',
+          icon: 'oui:integration-search'
         }
       },
       {

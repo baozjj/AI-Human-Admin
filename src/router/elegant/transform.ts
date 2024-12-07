@@ -179,6 +179,8 @@ const routeMap: RouteMap = {
   "404": "/404",
   "500": "/500",
   "about": "/about",
+  "ai-avatar": "/ai-avatar",
+  "ai-avatar_avatar-preview": "/ai-avatar/avatar-preview",
   "function": "/function",
   "function_hide-child": "/function/hide-child",
   "function_hide-child_one": "/function/hide-child/one",
