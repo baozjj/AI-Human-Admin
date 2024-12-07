@@ -193,6 +193,28 @@ export const generatedRoutes: GeneratedRoute[] = [
     }
   },
   {
+    name: 'knowledge-graph',
+    path: '/knowledge-graph',
+    component: 'layout.base',
+    meta: {
+      title: 'knowledge-graph',
+      i18nKey: 'route.knowledge-graph',
+      icon: 'material-symbols:bubble-chart'
+    },
+    children: [
+      {
+        name: 'knowledge-graph_graph-search',
+        path: '/knowledge-graph/graph-search',
+        component: 'view.knowledge-graph_graph-search',
+        meta: {
+          title: 'knowledge-graph_graph-search',
+          i18nKey: 'route.knowledge-graph_graph-search',
+          icon: 'oui:integration-search'
+        }
+      }
+    ]
+  },
+  {
     name: 'login',
     path: '/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?',
     component: 'layout.blank$view.login',
