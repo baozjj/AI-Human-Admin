@@ -203,6 +203,16 @@ export const generatedRoutes: GeneratedRoute[] = [
     },
     children: [
       {
+        name: 'knowledge-graph_entity-management',
+        path: '/knowledge-graph/entity-management',
+        component: 'view.knowledge-graph_entity-management',
+        meta: {
+          title: 'knowledge-graph_entity-management',
+          i18nKey: 'route.knowledge-graph_entity-management',
+          icon: 'oui:dot'
+        }
+      },
+      {
         name: 'knowledge-graph_graph-search',
         path: '/knowledge-graph/graph-search',
         component: 'view.knowledge-graph_graph-search',

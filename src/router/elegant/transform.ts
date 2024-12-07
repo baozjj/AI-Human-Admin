@@ -192,6 +192,7 @@ const routeMap: RouteMap = {
   "home": "/home",
   "iframe-page": "/iframe-page/:url",
   "knowledge-graph": "/knowledge-graph",
+  "knowledge-graph_entity-management": "/knowledge-graph/entity-management",
   "knowledge-graph_graph-search": "/knowledge-graph/graph-search",
   "login": "/login/:module(pwd-login|code-login|register|reset-pwd|bind-wechat)?",
   "manage": "/manage",
