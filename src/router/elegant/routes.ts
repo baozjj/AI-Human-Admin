@@ -57,7 +57,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'ai-avatar',
       i18nKey: 'route.ai-avatar',
-      icon: 'tdesign:accessibility'
+      icon: 'tdesign:accessibility',
+      order: 4
     },
     children: [
       {
@@ -241,7 +242,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'knowledge-graph',
       i18nKey: 'route.knowledge-graph',
-      icon: 'oui:app-packetbeat'
+      icon: 'oui:app-packetbeat',
+      order: 3
     },
     children: [
       {
@@ -251,7 +253,8 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'knowledge-graph_entity-management',
           i18nKey: 'route.knowledge-graph_entity-management',
-          icon: 'oui:dot'
+          icon: 'oui:dot',
+          order: 2
         }
       },
       {
@@ -261,7 +264,8 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'knowledge-graph_graph-search',
           i18nKey: 'route.knowledge-graph_graph-search',
-          icon: 'oui:integration-search'
+          icon: 'oui:integration-search',
+          order: 1
         }
       },
       {
@@ -271,7 +275,8 @@ export const generatedRoutes: GeneratedRoute[] = [
         meta: {
           title: 'knowledge-graph_relation-management',
           i18nKey: 'route.knowledge-graph_relation-management',
-          icon: 'oui:kql-operand'
+          icon: 'oui:kql-operand',
+          order: 3
         }
       }
     ]
@@ -296,7 +301,7 @@ export const generatedRoutes: GeneratedRoute[] = [
       title: 'manage',
       i18nKey: 'route.manage',
       icon: 'carbon:cloud-service-management',
-      order: 9,
+      order: 5,
       roles: ['R_ADMIN']
     },
     children: [
@@ -359,7 +364,8 @@ export const generatedRoutes: GeneratedRoute[] = [
     meta: {
       title: 'multi-menu',
       i18nKey: 'route.multi-menu',
-      order: 8
+      order: 8,
+      hideInMenu: true
     },
     children: [
       {

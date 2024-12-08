@@ -91,21 +91,15 @@ export const useAuthStore = defineStore(SetupStoreId.Auth, () => {
     // 1. stored in the localStorage, the later requests need it in headers
     localStg.set('token', loginToken.token);
     localStg.set('refreshToken', loginToken.refreshToken);
-
-    // 2. get user info
-    const pass = await getUserInfo();
-
-    if (pass) {
-      token.value = loginToken.token;
-
-      return true;
-    }
-
-    return false;
+    return true;
   }
 
   async function getUserInfo() {
     const { data: info, error } = await fetchGetUserInfo();
+
+    if (info) {
+      info.userName = '汪溢溢';
+    }
 
     if (!error) {
       // update store
