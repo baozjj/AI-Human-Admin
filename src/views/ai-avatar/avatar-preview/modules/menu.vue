@@ -38,7 +38,12 @@ const items: ItemType[] = reactive([
     :items="items"
     :theme="state.theme"
   ></AMenu>
-  <div class="right"></div>
+  <div class="image-container">
+    <img src="@/assets/imgs/avatar-bg/bg1.png" alt="Image 1" />
+    <img src="@/assets/imgs/avatar-bg/bg2.png" alt="Image 1" />
+    <img src="@/assets/imgs/avatar-bg/bg3.png" alt="Image 1" />
+    <img src="@/assets/imgs/avatar-bg/bg4.png" alt="Image 1" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -46,10 +51,24 @@ const items: ItemType[] = reactive([
   height: 100px;
 }
 
-.right {
+.image-container {
+  display: flex;
+  flex-direction: column; /* 竖直排列图片 */
+  align-items: center; /* 图片水平居中 */
+  justify-content: start;
   background-color: #fff;
+  gap: 30px; /* 图片之间的间距 */
   height: 100%;
   width: 300px;
   border-radius: 0 10px 10px 0;
+  padding: 20px;
+}
+
+.image-container img {
+  width: 230px; /* 固定宽度 */
+  height: 130px; /* 固定高度，确保图片一致 */
+  object-fit: cover; /* 确保图片裁剪以填充大小 */
+  border: 1px solid #ccc; /* 可选，添加边框 */
+  border-radius: 10px;
 }
 </style>
