@@ -55,20 +55,20 @@ async function search() {
     >
       <ARow :gutter="[16, 16]" wrap>
         <ACol :span="24" :md="12" :lg="6">
-          <AFormItem label="实体名称" name="userName" class="m-0">
-            <AInput v-model:value="model.userName" placeholder="请输入实体名称" />
+          <AFormItem label="头实体" name="userName" class="m-0">
+            <AInput v-model:value="model.userName" placeholder="请输入头实体" />
           </AFormItem>
         </ACol>
         <ACol :span="24" :md="12" :lg="6">
-          <AFormItem label="实体类型" name="nickName" class="m-0">
-            <AInput v-model:value="model.nickName" placeholder="请输入实体类型" />
+          <AFormItem label="尾实体" name="nickName" class="m-0">
+            <AInput v-model:value="model.nickName" placeholder="请输入尾实体" />
           </AFormItem>
         </ACol>
         <ACol :span="24" :md="12" :lg="6">
-          <AFormItem label="实体状态" name="userStatus" class="m-0">
+          <AFormItem label="关系类型" name="userStatus" class="m-0">
             <ASelect
               v-model:value="model.status"
-              placeholder="请选择实体状态"
+              placeholder="请选择关系类型"
               :options="translateOptions(enableStatusOptions)"
               clearable
             />
