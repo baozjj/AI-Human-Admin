@@ -1,9 +1,12 @@
-<script lang="ts" setup>
-import {} from 'vue';
+<script setup>
+import EntitySearch from './components/entitySearch/index.vue';
 </script>
 
 <template>
-  <div class="">12</div>
+  <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
+    <EntitySearch />
+    123
+  </div>
 </template>
 
-<style scoped lang="stylus"></style>
+<style scoped></style>
