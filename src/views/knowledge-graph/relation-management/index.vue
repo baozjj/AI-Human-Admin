@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { Button, Popconfirm, Tag } from 'ant-design-vue';
 import { fetchGetUserList } from '@/service/api';
 import { useTable, useTableOperate, useTableScroll } from '@/hooks/common/table';
@@ -161,8 +161,12 @@ const mySearch = async () => {
   console.log(data.value);
   mobilePagination.value.total = 2000;
   pagination.value = mobilePagination.value;
-  pagination.value.total = 5782;
+  pagination.value.total = 3782;
 };
+
+onBeforeMount(() => {
+  mySearch();
+});
 </script>
 
 <template>

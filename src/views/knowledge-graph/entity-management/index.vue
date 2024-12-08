@@ -1,13 +1,13 @@
 <script setup lang="tsx">
-import { ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { Button, Popconfirm, Tag } from 'ant-design-vue';
 import { fetchGetUserList } from '@/service/api';
 import { useTable, useTableOperate, useTableScroll } from '@/hooks/common/table';
 import { $t } from '@/locales';
-import { enableStatusRecord, userGenderRecord } from '@/constants/business';
+import { enableStatusRecord } from '@/constants/business';
 import UserOperateDrawer from './modules/user-operate-drawer.vue';
 import UserSearch from './modules/user-search.vue';
-import { mockData, mockData2 } from './service/const';
+import { mockData } from './service/const';
 const { tableWrapperRef, scrollConfig } = useTableScroll();
 
 const {
@@ -184,6 +184,10 @@ const mySearch = async () => {
   pagination.value = mobilePagination.value;
   pagination.value.total = 5782;
 };
+
+onBeforeMount(() => {
+  mySearch();
+});
 </script>
 
 <template>
