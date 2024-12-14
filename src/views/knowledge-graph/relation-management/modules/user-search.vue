@@ -43,7 +43,7 @@ async function search() {
 </script>
 
 <template>
-  <ACard title="实体搜索" :bordered="false" class="card-wrapper">
+  <ACard title="关系搜索" :bordered="false" class="card-wrapper">
     <AForm
       ref="formRef"
       :model="model"
