@@ -12,19 +12,11 @@ import CreativityBanner from './modules/creativity-banner.vue';
     <HeaderBanner />
     <CardData />
     <ARow :gutter="[16, 16]">
-      <ACol :span="24" :lg="14">
+      <ACol :span="24" :lg="10">
         <LineChart />
       </ACol>
-      <ACol :span="24" :lg="10">
-        <PieChart />
-      </ACol>
-    </ARow>
-    <ARow :gutter="[16, 16]">
       <ACol :span="24" :lg="14">
-        <ProjectNews />
-      </ACol>
-      <ACol :span="24" :lg="10">
-        <CreativityBanner />
+        <PieChart />
       </ACol>
     </ARow>
   </ASpace>

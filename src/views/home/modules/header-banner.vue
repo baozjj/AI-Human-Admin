@@ -52,7 +52,7 @@ const statisticData = computed<StatisticData[]>(() => [
       </ACol>
       <ACol :span="24" :md="6">
         <ASpace class="w-full justify-end" :size="24">
-          <AStatistic v-for="item in statisticData" :key="item.id" class="whitespace-nowrap" v-bind="item" />
+          <!-- <AStatistic v-for="item in statisticData" :key="item.id" class="whitespace-nowrap" v-bind="item" /> -->
         </ASpace>
       </ACol>
     </ARow>

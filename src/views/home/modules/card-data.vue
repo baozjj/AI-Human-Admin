@@ -22,8 +22,8 @@ interface CardData {
 const cardData = computed<CardData[]>(() => [
   {
     key: 'visitCount',
-    title: $t('page.home.visitCount'),
-    value: 9725,
+    title: '总访问量',
+    value: 19725,
     unit: '',
     color: {
       start: '#ec4786',
@@ -33,36 +33,36 @@ const cardData = computed<CardData[]>(() => [
   },
   {
     key: 'turnover',
-    title: $t('page.home.turnover'),
-    value: 1026,
-    unit: '$',
+    title: '服务请求量',
+    value: 81026,
+    unit: '',
     color: {
       start: '#865ec0',
       end: '#5144b4'
     },
-    icon: 'ant-design:money-collect-outlined'
+    icon: 'ant-design:to-top-outlined'
   },
   {
     key: 'downloadCount',
-    title: $t('page.home.downloadCount'),
-    value: 970925,
+    title: '日均访问量',
+    value: 3925,
     unit: '',
     color: {
       start: '#56cdf3',
       end: '#719de3'
     },
-    icon: 'carbon:document-download'
+    icon: 'ant-design:rise-outlined'
   },
   {
     key: 'dealCount',
-    title: $t('page.home.dealCount'),
-    value: 9527,
+    title: '活跃用户数',
+    value: 2527,
     unit: '',
     color: {
       start: '#fcbc25',
       end: '#f68057'
     },
-    icon: 'ant-design:trademark-circle-outlined'
+    icon: 'ant-design:user-outlined'
   }
 ]);
 
