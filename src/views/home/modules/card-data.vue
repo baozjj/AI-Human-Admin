@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { createReusableTemplate } from '@vueuse/core';
-import { $t } from '@/locales';
 
 defineOptions({
   name: 'CardData'
