@@ -1,219 +1,260 @@
-<script setup lang="tsx">
-import { onBeforeMount, ref } from 'vue';
-import { Button, Popconfirm, Tag } from 'ant-design-vue';
-import { fetchGetUserList } from '@/service/api';
-import { useTable, useTableOperate, useTableScroll } from '@/hooks/common/table';
-import { $t } from '@/locales';
-import { enableStatusRecord } from '@/constants/business';
-import UserOperateDrawer from './modules/user-operate-drawer.vue';
-import UserSearch from './modules/user-search.vue';
-import { mockData } from './service/const';
-const { tableWrapperRef, scrollConfig } = useTableScroll();
-
-const {
-  columns,
-  columnChecks,
-  data,
-  getData,
-  getDataByPage,
-  loading,
-  mobilePagination,
-  searchParams,
-  resetSearchParams
-} = useTable({
-  apiFn: fetchGetUserList,
-  apiParams: {
-    current: 1,
-    size: 10,
-    // if you want to use the searchParams in Form, you need to define the following properties, and the value is null
-    // the value can not be undefined, otherwise the property in Form will not be reactive
-    status: undefined,
-    userName: undefined,
-    userGender: undefined,
-    nickName: undefined,
-    userPhone: undefined,
-    userEmail: undefined
-  },
-  columns: () => [
-    {
-      key: 'index',
-      title: 'id',
-      dataIndex: 'index',
-      align: 'center',
-      width: 64
-    },
-    {
-      key: 'userName',
-      dataIndex: 'userName',
-      title: 'Prompt名称',
-      align: 'center',
-      minWidth: 100
-    },
-    {
-      key: 'nickName',
-      dataIndex: 'nickName',
-      title: '描述',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      key: 'updateBy',
-      dataIndex: 'updateBy',
-      title: '创建人',
-      align: 'center',
-      minWidth: 100
-    },
-    {
-      key: 'userPhone',
-      dataIndex: 'userPhone',
-      title: '创建时间',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      key: 'userEmail',
-      dataIndex: 'userEmail',
-      title: '更新时间',
-      align: 'center',
-      minWidth: 200
-    },
-    {
-      key: 'status',
-      dataIndex: 'status',
-      title: '状态',
-      align: 'center',
-      width: 100,
-      customRender: ({ record }) => {
-        if (record.status === null) {
-          return null;
+<script>
+export default {
+  data() {
+    return {
+      // 聊天模块数据
+      chatMessages: [
+        {
+          type: 'user',
+          content: '你好'
+        },
+        {
+          type: 'system',
+          content: '您好，欢迎使用物业服务智能问答系统！我是您的数字物业助理，请问需要什么帮助？'
+        },
+        {
+          type: 'user',
+          content: '有哪些社区活动可以参加？'
+        },
+        {
+          type: 'system',
+          content:
+            '本月社区活动有以下安排：\n1. 健身操培训（每周二、四，下午6:00-7:00）；\n2. 社区义卖活动（3月18日，上午9:00-12:00）；\n3. 业主联谊晚会（3月25日，晚上7:00-9:00）。\n欢迎参加！'
         }
+      ],
 
-        const tagMap: Record<Api.Common.EnableStatus, string> = {
-          1: 'success',
-          2: 'warning'
-        };
+      userInput: '',
 
-        const labels = {
-          0: '通过',
-          1: '审核中'
-        };
+      // 配置模块数据
+      selectedPrompt: 'general',
+      prompts: [
+        { value: 'general', label: '通用对话' },
+        { value: 'repair', label: '维修请求生成' },
+        { value: 'activity', label: '活动安排生成' }
+      ],
+      contextEnabled: false,
+      contextLength: 3,
+      temperature: 0.7,
+      topK: 50,
+      topP: 0.9,
+      knowledgeSource: 'local',
+      syncKnowledgeBase: true,
+      logEnabled: true,
+      feedbackEnabled: true,
+      defaultReply: '抱歉，我无法回答您的问题。'
+    };
+  },
+  methods: {
+    sendMessage() {
+      if (!this.userInput.trim()) return;
+      const userMessage = { type: 'user', content: this.userInput };
+      this.chatMessages.push(userMessage);
+      this.userInput = '';
 
-        const label = labels[record.status];
-
-        return <Tag color={tagMap[record.status]}>{label}</Tag>;
+      setTimeout(() => {
+        const response = this.generateResponse(userMessage.content);
+        this.chatMessages.push({ type: 'system', content: response });
+      }, 500);
+    },
+    generateResponse(input) {
+      // 根据选定的 Prompt 生成回复
+      switch (this.selectedPrompt) {
+        case 'repair':
+          return `维修请求已生成：${input}`;
+        case 'activity':
+          return `活动安排已生成：${input}`;
+        default:
+          return `已收到您的问题：${input}`;
       }
     },
-    {
-      key: 'operate',
-      title: $t('common.operate'),
-      align: 'center',
-      width: 180,
-      customRender: ({ record }) => (
-        <div class="flex-center gap-8px">
-          <Button type="primary" ghost size="small" onClick={() => edit(record.id)}>
-            {$t('common.edit')}
-          </Button>
-          <Button size="small" onClick={() => edit(record.id)}>
-            详情
-          </Button>
-          <Popconfirm title={$t('common.confirmDelete')} onConfirm={() => handleDelete(record.id)}>
-            <Button danger size="small">
-              {$t('common.delete')}
-            </Button>
-          </Popconfirm>
-        </div>
-      )
+    editPrompt() {
+      alert('编辑 Prompt 模板功能尚未实现');
     }
-  ]
-});
-
-const {
-  drawerVisible,
-  operateType,
-  editingData,
-  handleAdd,
-  handleEdit,
-  checkedRowKeys,
-  rowSelection,
-  onBatchDeleted,
-  onDeleted
-  // closeDrawer
-} = useTableOperate(data, getData);
-
-async function handleBatchDelete() {
-  // request
-  // console.log(checkedRowKeys.value);
-
-  onBatchDeleted();
-}
-
-function handleDelete(id: number) {
-  // request
-  console.log(id);
-
-  onDeleted();
-}
-
-function edit(id: number) {
-  handleEdit(id);
-}
-
-const pagination = ref({});
-
-const mySearch = async () => {
-  await getDataByPage();
-  data.value = mockData;
-  console.log(data.value);
-  mobilePagination.value.total = 2000;
-  pagination.value = mobilePagination.value;
-  pagination.value.total = 148;
+  }
 };
-
-onBeforeMount(() => {
-  mySearch();
-});
 </script>
 
 <template>
-  <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
-    <UserSearch v-model:model="searchParams" @reset="resetSearchParams" @search="mySearch" />
-    <ACard
-      title="prompt 列表"
-      :bordered="false"
-      :body-style="{ flex: 1, overflow: 'hidden' }"
-      class="flex-col-stretch sm:flex-1-hidden card-wrapper"
-    >
-      <template #extra>
-        <TableHeaderOperation
-          v-model:columns="columnChecks"
-          :disabled-delete="checkedRowKeys.length === 0"
-          :loading="loading"
-          @add="handleAdd"
-          @delete="handleBatchDelete"
-          @refresh="getData"
-        />
-      </template>
-      <ATable
-        ref="tableWrapperRef"
-        :columns="columns"
-        :data-source="data"
-        size="small"
-        :row-selection="rowSelection"
-        :scroll="scrollConfig"
-        :loading="loading"
-        row-key="id"
-        :pagination="pagination"
-        class="h-full"
-      />
+  <div class="app-container">
+    <!-- 左侧聊天模块 -->
+    <div class="chat-container">
+      <div class="chat-header">问答聊天模块</div>
+      <div class="chat-body">
+        <div v-for="(message, index) in chatMessages" :key="index" class="chat-message" :class="message.type">
+          <div class="message-bubble">
+            <p>{{ message.content }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <input v-model="userInput" type="text" placeholder="请输入内容..." @keyup.enter="sendMessage" />
+        <button @click="sendMessage">发送</button>
+      </div>
+    </div>
 
-      <UserOperateDrawer
-        v-model:visible="drawerVisible"
-        :operate-type="operateType"
-        :row-data="editingData"
-        @submitted="mySearch"
-      />
-    </ACard>
+    <!-- 右侧配置模块 -->
+    <div class="config-container">
+      <div class="config-header">问答配置模块</div>
+      <div class="config-body">
+        <!-- Prompt 模板选择 -->
+        <div class="config-item">
+          <label for="prompt">选择 Prompt 模板：</label>
+          <select id="prompt" v-model="selectedPrompt">
+            <option v-for="prompt in prompts" :key="prompt.value" :value="prompt.value">
+              {{ prompt.label }}
+            </option>
+          </select>
+          <AButton style="margin-top: 5px" size="small">编辑模板</AButton>
+        </div>
+
+        <!-- 问答上下文管理 -->
+        <div class="config-item">
+          <label>上下文长度：</label>
+          <input v-model="contextLength" type="number" min="1" max="10" placeholder="输入上下文轮次" />
+        </div>
+
+        <!-- 知识库管理 -->
+        <div class="config-item">
+          <label>知识库来源：</label>
+          <select v-model="knowledgeSource">
+            <option value="local">本地知识图谱</option>
+            <option value="cloud">云端知识库</option>
+            <option value="static">静态预设数据</option>
+          </select>
+        </div>
+
+        <!-- 错误处理策略 -->
+        <div class="config-item">
+          <label>无法回答时的默认回复：</label>
+          <input v-model="defaultReply" type="text" placeholder="如：抱歉，我无法回答您的问题" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* 应用主容器 */
+.app-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f0f0; /* 灰色背景 */
+  font-family: Arial, sans-serif;
+}
+
+/* 聊天模块样式 */
+.chat-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+  background-color: #ffffff;
+}
+
+.chat-header {
+  padding: 15px;
+  background-color: #3098ff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+}
+
+.chat-message.user {
+  text-align: right;
+  color: #3098ff;
+}
+
+.chat-message.system {
+  text-align: left;
+  color: #444;
+}
+
+.message-bubble {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #e6f7ff;
+  max-width: 60%;
+}
+
+.chat-footer {
+  display: flex;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ccc;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  background-color: #fff;
+}
+
+.chat-footer button {
+  background-color: #3098ff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chat-footer button:hover {
+  background-color: #005a9e;
+}
+
+/* 配置模块样式 */
+.config-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+}
+
+.config-header {
+  padding: 15px;
+  background-color: #3098ff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.config-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.config-item {
+  margin-bottom: 15px;
+}
+
+.config-item label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.config-item input,
+.config-item select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+</style>
