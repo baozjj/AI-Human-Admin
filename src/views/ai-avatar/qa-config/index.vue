@@ -2,30 +2,25 @@
 export default {
   data() {
     return {
-      // 聊天模块数据
+      // 聊天模块数据保持不变
       chatMessages: [
-        {
-          type: 'user',
-          content: '你好'
-        },
-        {
-          type: 'system',
-          content: '您好，欢迎使用物业服务智能问答系统！我是您的数字物业助理，请问需要什么帮助？'
-        },
-        {
-          type: 'user',
-          content: '有哪些社区活动可以参加？'
-        },
+        { type: 'user', content: '你好' },
+        { type: 'system', content: '您好，欢迎使用物业服务智能问答系统！我是您的数字物业助理，请问需要什么帮助？' },
+        { type: 'user', content: '有哪些社区活动可以参加？' },
         {
           type: 'system',
           content:
             '本月社区活动有以下安排：\n1. 健身操培训（每周二、四，下午6:00-7:00）；\n2. 社区义卖活动（3月18日，上午9:00-12:00）；\n3. 业主联谊晚会（3月25日，晚上7:00-9:00）。\n欢迎参加！'
         }
       ],
-
       userInput: '',
-
-      // 配置模块数据
+      // 搜索历史聊天记录
+      searchQuery: '',
+      // 过滤后的历史聊天记录
+      historyMessages: [
+        { type: 'user', content: '我想了解物业服务' },
+        { type: 'user', content: '篮球场开放时间' }
+      ],
       selectedPrompt: 'general',
       prompts: [
         { value: 'general', label: '通用对话' },
@@ -44,6 +39,14 @@ export default {
       defaultReply: '抱歉，我无法回答您的问题。'
     };
   },
+  computed: {
+    // 根据搜索条件过滤历史聊天记录
+    filteredHistoryMessages() {
+      return this.historyMessages.filter(message =>
+        message.content.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+  },
   methods: {
     sendMessage() {
       if (!this.userInput.trim()) return;
@@ -57,7 +60,6 @@ export default {
       }, 500);
     },
     generateResponse(input) {
-      // 根据选定的 Prompt 生成回复
       switch (this.selectedPrompt) {
         case 'repair':
           return `维修请求已生成：${input}`;
@@ -66,6 +68,10 @@ export default {
         default:
           return `已收到您的问题：${input}`;
       }
+    },
+    selectHistory(message) {
+      // 点击历史聊天记录时，将其内容加载到聊天模块
+      this.chatMessages.push({ type: 'system', content: message.content });
     },
     editPrompt() {
       alert('编辑 Prompt 模板功能尚未实现');
@@ -76,6 +82,22 @@ export default {
 
 <template>
   <div class="app-container">
+    <!-- 左侧历史聊天记录模块 -->
+    <div class="history-container">
+      <div class="history-header">历史聊天记录</div>
+      <div class="history-body">
+        <input v-model="searchQuery" type="text" placeholder="搜索历史聊天记录..." class="search-box" />
+        <div
+          v-for="(message, index) in filteredHistoryMessages"
+          :key="index"
+          class="history-item"
+          @click="selectHistory(message)"
+        >
+          <p>{{ message.content }}</p>
+        </div>
+      </div>
+    </div>
+
     <!-- 左侧聊天模块 -->
     <div class="chat-container">
       <div class="chat-header">问答聊天模块</div>
@@ -140,6 +162,46 @@ export default {
   height: 100vh;
   background-color: #f0f0f0; /* 灰色背景 */
   font-family: Arial, sans-serif;
+}
+
+.history-container {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #ccc;
+}
+
+.history-header {
+  padding: 15px;
+  background-color: #3098ff;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.history-body {
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.search-box {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.history-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #e6f7ff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.history-item:hover {
+  background-color: #b3e0ff;
 }
 
 /* 聊天模块样式 */
